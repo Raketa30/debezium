@@ -1,12 +1,13 @@
 version: "3.7"
 services:
+
   postgres:
     image: debezium/postgres:13
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: docker
-      POSTGRES_PASSWORD: docker
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
       POSTGRES_DB: data_from
 
   mysql:
@@ -44,7 +45,7 @@ services:
       - "9092:9092"
 
   debezium:
-    image: debezium/connect:1.7.1.Final
+    image: debezium/connect:1.9.5.Final
     build:
       context: debezium-jdbc
     environment:
