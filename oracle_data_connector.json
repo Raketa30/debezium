@@ -1,0 +1,21 @@
+{
+  "name": "oracle-data-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.oracle.OracleConnector",
+    "database.hostname": "oracle",
+    "database.oracle.version" : "12+",
+    "database.port": "1521",
+    "database.user": "SYSTEM",
+    "database.password": "rootpass",
+    "database.dbname": "system",
+    "database.pdb.name" : "ORCLPDB1",
+    "database.server.name": "data_to",
+    "table.include.list": "table_name",
+    "key.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+
+    "key.converter.schema.registry.url": "http://schema-registry:8081",
+    "value.converter.schema.registry.url": "http://schema-registry:8081"
+  }
+}
+

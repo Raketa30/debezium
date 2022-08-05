@@ -21,6 +21,20 @@ services:
     ports:
       - "3306:3306"
 
+  oracle:
+    image: daggerok/oracle:se
+    environment:
+      ORACLE_SID: ORCLCDB
+      ORACLE_PWD: rootpass
+      ORACLE_PDB: ORCLPDB1
+      ORACLE_CHARACTERSET: AL32UTF8
+    ports:
+      - "1521:1521"
+    volumes:
+      - "oracle-se2-data:/opt/oracle/oradata"
+      - "./db-startup-migration-scripts:/opt/oracle/scripts/startup"
+      - "./db-setup-migration-scripts:/docker-entrypoint-initdb.d/setup"
+
   zookeeper:
     image: confluentinc/cp-zookeeper:5.5.3
     environment:
@@ -44,7 +58,7 @@ services:
       - "9092:9092"
 
   debezium:
-    image: debezium/connect:1.7.1.Final
+    image: debezium/connect:1.9.5.Final
     build:
       context: debezium-jdbc
     environment:
@@ -72,3 +86,5 @@ services:
       - "8081:8081"
     depends_on:
       - kafka
+volumes:
+  oracle-se2-data: { }
