@@ -14,12 +14,16 @@
     "batch.size": "2",
     "transforms": "unwrap",
     "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.drop.tombstones":"false",
+    "transforms.unwrap.delete.handling.mode":"none",
     "pk.fields": "id",
     "pk.mode": "record_key",
     "quote.sql.identifiers": "never",
     "table.name.format": "data_to.table_name",
     "auto.create": "true",
     "auto.evolve":"true",
-    "insert.mode": "upsert"
+    "insert.mode": "upsert",
+    "delete.enabled": "true",
+    "delete.retention.ms": "500"
   }
 }
