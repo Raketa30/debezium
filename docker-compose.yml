@@ -22,10 +22,12 @@ services:
       - "3306:3306"
 
   oracle:
-    image: daggerok/oracle:se
+    image: doctorkirk/oracle-19c
+    build:
+      context: debezium-oracle
     environment:
       ORACLE_SID: ORCLCDB
-      ORACLE_PWD: rootpass
+      ORACLE_PWD: Admin123
       ORACLE_PDB: ORCLPDB1
       ORACLE_CHARACTERSET: AL32UTF8
     ports:
