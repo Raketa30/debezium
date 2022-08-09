@@ -4,8 +4,8 @@
 ORACLE_SID=ORCLCDB
 export ORACLE_SID
 sqlplus /nolog <<- EOF
-	CONNECT sys/Admin123 AS SYSDBA
-	alter system set db_recovery_file_dest_size = 2G;
+	CONNECT sys/mnXrQiRuNHc=1 AS SYSDBA
+	alter system set db_recovery_file_dest_size = 5G;
 	alter system set db_recovery_file_dest = '/opt/oracle/oradata/recovery_area' scope=spfile;
 	shutdown immediate
 	startup mount
@@ -17,7 +17,7 @@ sqlplus /nolog <<- EOF
 EOF
 
 # Enable LogMiner required database features/settings
-sqlplus sys/Admin123@//localhost:1521/ORCLCDB as sysdba <<- 'EOF'
+sqlplus sys/mnXrQiRuNHc=1@//localhost:1521/ORCLCDB as sysdba <<- 'EOF'
   ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
   ALTER DATABASE ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
    	 SELECT SUPPLEMENTAL_LOG_DATA_MIN min,
@@ -31,17 +31,17 @@ sqlplus sys/Admin123@//localhost:1521/ORCLCDB as sysdba <<- 'EOF'
 EOF
 
 # Create Log Miner Tablespace and User
-sqlplus sys/Admin123@//localhost:1521/ORCLCDB as sysdba <<- EOF
+sqlplus sys/mnXrQiRuNHc=1@//localhost:1521/ORCLCDB as sysdba <<- EOF
   CREATE TABLESPACE LOGMINER_TBS DATAFILE '/opt/oracle/oradata/ORCLCDB/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
   exit;
 EOF
 
-sqlplus sys/Admin123@//localhost:1521/ORCLPDB1 as sysdba <<- EOF
+sqlplus sys/mnXrQiRuNHc=1@//localhost:1521/ORCLPDB1 as sysdba <<- EOF
   CREATE TABLESPACE LOGMINER_TBS DATAFILE '/opt/oracle/oradata/ORCLCDB/ORCLPDB1/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
   exit;
 EOF
 
-sqlplus sys/Admin123@//localhost:1521/ORCLCDB as sysdba <<- EOF
+sqlplus sys/mnXrQiRuNHc=1@//localhost:1521/ORCLCDB as sysdba <<- EOF
   CREATE USER c##dbzuser IDENTIFIED BY dbz DEFAULT TABLESPACE LOGMINER_TBS QUOTA UNLIMITED ON LOGMINER_TBS CONTAINER=ALL;
   GRANT CREATE SESSION TO c##dbzuser CONTAINER=ALL;
   GRANT SET CONTAINER TO c##dbzuser CONTAINER=ALL;
@@ -66,7 +66,7 @@ sqlplus sys/Admin123@//localhost:1521/ORCLCDB as sysdba <<- EOF
   exit;
 EOF
 
-sqlplus sys/Admin123@//localhost:1521/ORCLPDB1 as sysdba <<- EOF
+sqlplus sys/mnXrQiRuNHc=1@//localhost:1521/ORCLPDB1 as sysdba <<- EOF
   CREATE USER debezium IDENTIFIED BY dbz;
   GRANT CONNECT TO debezium;
   GRANT CREATE SESSION TO debezium;

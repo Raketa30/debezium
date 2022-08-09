@@ -1,4 +1,4 @@
-FROM doctorkirk/oracle-19c
+FROM wedorss/oracle-19c
 
 WORKDIR /opt/oracle/oradata
 

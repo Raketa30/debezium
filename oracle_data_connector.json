@@ -16,7 +16,7 @@
     "database.history.kafka.bootstrap.servers" : "kafka:9092",
     "database.history.kafka.topic": "server.oracle.history",
     "snapshot.mode": "initial",
-    "table.include.list": "DEBEZIUM.*, SYSTEM.TABLE_TEST",
+    "table.include.list": "DEBEZIUM.*",
     "errors.log.enable": "true",
     "key.converter": "io.confluent.connect.avro.AvroConverter",
     "value.converter": "io.confluent.connect.avro.AvroConverter",
