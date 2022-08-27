@@ -1,26 +1,5 @@
 version: "3.7"
 services:
-  postgres:
-    image: debezium/postgres:13
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: data_from
-
-  mysql:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_USER: docker
-      MYSQL_PASSWORD: docker
-      MYSQL_ROOT_USER: root
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: data_to
-    ports:
-      - "3306:3306"
-
   oracle:
     image: wedorss/oracle-19c
     build:
