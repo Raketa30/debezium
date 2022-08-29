@@ -11,7 +11,7 @@ WORKDIR /u01/app/oracle/product/19c/dbhome_1/inventory
 WORKDIR /u01/app/oracle/product/19c/dbhome_1/bin
 
 #Running my custom scripts
-COPY setup-logminer.sh /opt/oracle/scripts/extensions/startup/
+COPY setup-logminer.sh /opt/oracle/scripts/extensions/setup/
 
 RUN chgrp 54321 /opt/oracle/oradata
 RUN chown 54321 /opt/oracle/oradata

@@ -1,14 +1,5 @@
 version: "3.7"
 services:
-  postgres:
-    image: debezium/postgres:13
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: data_from
-
   mysql:
     image: mysql:8.0
     restart: always
@@ -29,14 +20,15 @@ services:
     environment:
       ORACLE_SID: ORCLCDB
       ORACLE_PDB: ORCLPDB1
+      ORACLE_PWD: mnXrQiRuNHc=1
       ORACLE_CHARACTERSET: AL32UTF8
     ports:
       - "1521:1521"
       - "5500:5500"
-    volumes:
-      - "oracle-data:/opt/oracle/oradata"
 
   zookeeper:
+    ports:
+      - "2181:2181"
     image: confluentinc/cp-zookeeper:5.5.3
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
