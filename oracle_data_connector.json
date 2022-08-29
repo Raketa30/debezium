@@ -10,7 +10,7 @@
     "validate.non.null": "false",
     "poll.interval.ms": "1000",
     "incrementing.column.name": "id",
-    "table.whitelist": "TABLE_NAME",
+    "table.whitelist": "C##TESTUSR.TABLE_NAME",
     "topic.prefix": "oracle_",
     "key.converter": "io.confluent.connect.avro.AvroConverter",
     "value.converter": "io.confluent.connect.avro.AvroConverter",

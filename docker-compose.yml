@@ -39,21 +39,25 @@ services:
     shm_size: 1g
 
   debezium:
-    image: debezium/connect:1.9.5.Final
-    build:
-      context: debezium-jdbc
+    image: confluentinc/cp-kafka-connect:5.4.9-1-ubi8.amd64
     environment:
-      BOOTSTRAP_SERVERS: kafka:9092
-      GROUP_ID: 1
-      STATUS_STORAGE_TOPIC: connect_status
-      CONFIG_STORAGE_TOPIC: connect_configs
-      OFFSET_STORAGE_TOPIC: connect_offsets
+      CONNECT_BOOTSTRAP_SERVERS: kafka:9092
+      CONNECT_REST_ADVERTISED_HOST_NAME: connect
+      CONNECT_GROUP_ID: 1
+      CONNECT_CONFIG_STORAGE_TOPIC: connect-configs
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_FLUSH_INTERVAL_MS: 10000
+      CONNECT_OFFSET_STORAGE_TOPIC: connect-offsets
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_TOPIC: connect-status
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
       CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
       CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
       CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
       CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
     depends_on:
       - kafka
+      - schema-registry
     ports:
       - "8083:8083"
     shm_size: 1g
